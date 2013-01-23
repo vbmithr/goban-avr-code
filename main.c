@@ -144,6 +144,8 @@ uint8_t read_msg(uint8_t *buf)
               goto top;
             default: /* All other error cases*/
               send_msg(NAK, ret);
+              uart0_flush(); // Flushing the receiving buffer, since
+                             // we’re unable to continue anyway.
               return ret_data[0];
             }
         }
